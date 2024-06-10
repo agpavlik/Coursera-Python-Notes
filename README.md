@@ -198,3 +198,11 @@ To include a quote within a string, use an escape character (\) before it. Other
 The \* and + operands obey by the standard precedence rules when used with strings. All other mathematical operators and operands result in a TypeError.
 
 Python has a special character called an escape character: \. When the escape character is used in a string, the character following the escape character is treated differently from normal. The escape character together with the character that follows it is an escape sequence.
+
+| Escape Sequence | Name                            | Example                     | Output         |
+| --------------- | ------------------------------- | --------------------------- | -------------- |
+| \n              | newline (ASCII linefeed - LF)   | print('''How are you?''')   | How are you?   |
+| \t              | tab(ASCII horizontal tab - TAB) | print('3\t4\t5')            | 3 4 5          |
+| \\\             | backslash (\\)                  | print('\\\\')               | \\             |
+| \\'             | single quote (\')               | print('don\\'t')            | don't          |
+| \\"             | double quote (")                | print("He says, \\"hi\\".") | He says, "hi". |
