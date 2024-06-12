@@ -11,7 +11,7 @@
 - [Built-in Functions](#3)
 - [Defining Function](#4)
 - [String](#5)
-- [Defining Functions](#4)
+- [Converting str, int, float](#6)
 - [Defining Functions](#4)
 - [Defining Functions](#4)
 - [Defining Functions](#4)
@@ -281,3 +281,59 @@ Python has a special character called an escape character: \. When the escape ch
 | \\\             | backslash (\\)                  | print('\\\\')               | \\             |
 | \\'             | single quote (\')               | print('don\\'t')            | don't          |
 | \\"             | double quote (")                | print("He says, \\"hi\\".") | He says, "hi". |
+
+---
+
+### 📒 Converting str, int, float <a name="6"></a>
+
+`str`
+Builtin function str takes any value and returns a string representation of that value.
+
+```
+>>> str(3)
+'3'
+>>> str(47.6)
+'47.6'
+```
+
+`int`
+Builtin function int takes a string containing only digits (possibly with a leading minus sign -) and returns the int that represents. Function int also converts float values to integers by throwing away the fractional part.
+
+```
+>>> int('12345')
+12345
+>>> int('-998')
+-998
+>>> int(-99.9)
+-99
+```
+
+If function int is called with a string that contains anything other than digits, a ValueError happens.
+
+```
+>>> int('-99.9')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ValueError: invalid literal for int() with base 10: '-99.9'
+```
+
+`float`
+Builtin function float takes a string containing only digits and zero or one decimal points (possibly with a leading minus sign -) and returns the float that represents. Function float also converts int values to floats.
+
+```
+> > > float('-43.2')
+> > > -43.2
+> > > float('432')
+> > > 432.0
+> > > float(4)
+> > > 4.0
+```
+
+If function float is called with a string that can't be converted, a ValueError happens.
+
+```
+> > > float('-9.9.9')
+> > > Traceback (most recent call last):
+> > > File "<stdin>", line 1, in <module>
+> > > ValueError: could not convert string to float: '-9.9.9'
+```
