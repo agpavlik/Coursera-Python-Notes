@@ -11,8 +11,15 @@
 - [Built-in Functions](#3)
 - [Defining Function](#4)
 - [String](#5)
+  - [Modifying Strings](#51)
+  - [String Methods](#52)
+  - [for loop over String](#53)
 - [Converting str, int, float](#6)
 - [if statements](#7)
+- [Defining Functions](#4)
+- [Defining Functions](#4)
+- [Defining Functions](#4)
+- [Defining Functions](#4)
 - [Defining Functions](#4)
 - [Defining Functions](#4)
 
@@ -281,6 +288,139 @@ Python has a special character called an escape character: \. When the escape ch
 | \\\             | backslash (\\)                  | print('\\\\')               | \\             |
 | \\'             | single quote (\')               | print('don\\'t')            | don't          |
 | \\"             | double quote (")                | print("He says, \\"hi\\".") | He says, "hi". |
+
+---
+
+### 📒 Modifying Strings <a name="51"></a>
+
+`Indexing`
+An index is a position within the string. Positive indices count from the left-hand side with the first character at index 0, the second at index 1, and so on. Negative indices count from the right-hand side with the last character at index -1, the second last at index -2, and so on. For the string "Learn to Program", the indices are:
+
+```
+Let s refer to 'Learn to Program'.
+
+The first character of the string is at index 0 and can be accessed using this bracket notation:
+
+>>> s[0]
+'L'
+>>> s[1]
+'e'
+Negative indices are used to count from the end (from the right-hand side):
+>>> s[-1]
+'m'
+>>> s[-2]
+'a'
+```
+
+`Slicing`
+We can extract more than one character using slicing. A slice is a substring from the start index up to but not including the end index. For example:
+
+```
+>>> s[0:5]
+'Learn'
+>>> s[6:8]
+'to'
+>>> s[9:16]
+'Program'
+More generally, the end of the string can be represented using its length:
+>>> s[9:len(s)]
+'Program'
+The end index may be omitted entirely and the default is len(s):
+>>> s[9:]
+'Program'
+Similarly, if the start index is omitted, the slice starts from index 0:
+>>> s[:]
+'Learn to Program'
+>>> s[:8]
+'Learn to'
+Negative indices can be used for slicing too. The following three expressions are equivalent:
+>>> s[1:8]
+'earn to'
+>>> s[1:-8]
+'earn to'
+>>> s[-15:-8]
+'earn to'
+```
+
+`Modifying Strings`
+The slicing and indexing operations do not modify the string that they act on, so the string that s refers to is unchanged by the operations above. In fact, we cannot change a string. Operations like the following result in errors:
+
+```
+>>> s[6] = 'd'
+Traceback (most recent call last):
+        File <"pyshell#19", line 1, in <module>
+                s[6] = 'd'
+TypeError: 'str' object does not support item assignment
+```
+
+Imagine that we want to change string s to refer to 'Learned to Program'. The following expression evaluates to that 'Learned to Program': s[:5] + 'ed' + s[5:]
+
+Variable s gets the new string:
+
+```
+s = s[:5] + 'ed' + s[5:]
+```
+
+Notice that the string that s originally referred to was not modified: strings cannot be modified. Instead a new string was created and s was changed to point to that string.
+
+---
+
+### 📒 String Methods <a name="52"></a>
+
+A `method` is a function inside of an object.
+
+The general form of a method call is:
+
+```
+object.method(arguments)
+```
+
+Consider the code:
+
+```
+>>> white_rabbit = "I'm late! I'm late! For a very important date!"
+```
+
+To find out which methods are inside strings, use the function dir:
+
+```
+>>> dir(white_rabbit)
+['__add__', '__class__', '__contains__', '__delattr__', '__doc__', '__eq__', '__format__',
+'__ge__', '__getattribute__','__getitem__', '__getnewargs__', '__gt__', '__hash__', '__init__',
+'__iter__', '__le__', '__len__', '__lt__', '__mod__', '__mul__', '__ne__', '__new__', '__reduce__',
+'__reduce_ex__', '__repr__', '__rmod__', '__rmul__', '__setattr__', '__sizeof__', '__str__',
+'__subclasshook__', 'capitalize', 'center', 'count', 'encode', 'endswith', 'expandtabs', 'find',
+'format', 'format_map', 'index', 'isalnum', 'isalpha', 'isdecimal', 'isdigit', 'isidentifier',
+'islower', 'isnumeric', 'isprintable', 'isspace', 'istitle', 'isupper', 'join', 'ljust', 'lower',
+'lstrip', 'maketrans', 'partition', 'replace', 'rfind', 'rindex', 'rjust', 'rpartition', 'rsplit',
+'rstrip', 'split', 'splitlines', 'startswith', 'strip', 'swapcase', 'title', 'translate', 'upper',
+ 'zfill']
+```
+
+Passing str as an argument to dir gets the same result:
+
+```
+>>> dir(str)
+```
+
+For many of the string methods, a new string is returned. Since strings are immutable, the original string is unchanged. For example, a lowercase version of the str that white_rabbit refers to is returned when the method lower is called:
+
+```
+>>> white_rabbit.lower()
+>>> "i'm late! i'm late! for a very important date!"
+>>> white_rabbit
+>>> "I'm late! I'm late! For a very important date!"
+```
+
+To get information about a method, such as the lower method, do the following:
+
+```
+>>> help(str.lower)
+```
+
+---
+
+### 📒 for loop over String <a name="53"></a>
 
 ---
 
