@@ -9,7 +9,7 @@
 - [Operators](#1)
 - [Variables](#2)
 - [Built-in Functions](#3)
-- [Defining Functions](#4)
+- [Defining Function](#4)
 - [String](#5)
 - [Defining Functions](#4)
 - [Defining Functions](#4)
@@ -186,6 +186,81 @@ The rules for executing a function call:
 - Execute the body of the function.
 
 We usually save our Python programs in ".py" files. A file can contain multiple function definitions and other statements. Before calling a function from a ".py" file in the shell in IDLE, you need to first execute Run -> Run Module, or else the shell will not recognize the function call.
+
+> Function Design Recipe
+
+The Six Steps:
+
+1. Examples
+
+- What should your function do?
+- Type a couple of example calls.
+- Pick a name (often a verb or verb phrase): What is a short answer to "What does your function do"?
+
+2. Type Contract
+
+- What are the parameter types?
+- What type of value is returned?
+
+3. Header
+
+- Pick meaningful parameter names.
+
+4. Description
+
+- Mention every parameter in your description.
+- Describe the return value.
+
+5. Body
+
+- Write the body of your function.
+
+6. Test
+
+- Run the examples.
+
+Applying the Design Recipe:
+The United States measures temperature in Fahrenheit and Canada measures it in Celsius. When travelling between the two countries it helps to have a conversion function. Write a function that converts from Fahrenheit to Celsius.
+
+```
+Examples
+    >>> convert_to_celsius(32)
+    0
+    >>> convert_to_celsius(212)
+    100
+
+Type Contract
+    (number) -> number
+
+Header
+    def convert_to_celsius(fahrenheit):
+
+Description
+    Return the number of Celsius degrees equivalent to fahrenheit degrees.
+
+Body
+    return (fahrenheit - 32) * 5 / 9
+
+Test
+     Run the examples.
+```
+
+Putting it all together:
+
+```
+def convert_to_celsius(fahrenheit):
+''' (number) -> number
+
+Return the number of Celsius degrees equivalent to fahrenheit degrees.
+
+> > > convert_to_ccelsius(32)
+> > > 0
+> > > convert_to_celsius(212)
+> > > 100
+> > > '''
+
+return (fahrenheit - 32) \* 5 / 9
+```
 
 ---
 
