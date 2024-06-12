@@ -12,7 +12,7 @@
 - [Defining Function](#4)
 - [String](#5)
 - [Converting str, int, float](#6)
-- [Defining Functions](#4)
+- [if statements](#7)
 - [Defining Functions](#4)
 - [Defining Functions](#4)
 
@@ -336,4 +336,72 @@ If function float is called with a string that can't be converted, a ValueError 
 > > > Traceback (most recent call last):
 > > > File "<stdin>", line 1, in <module>
 > > > ValueError: could not convert string to float: '-9.9.9'
+```
+
+---
+
+### 📒 if statements <a name="7"></a>
+
+`If` statements can be used to control which instructions are executed. Here is the general form:
+
+```
+if expression1:
+    body1
+[elif expression2:      0 or more clauses
+    body2]
+[else:                  0 or 1 clause
+    bodyN]
+```
+
+`elif` stands for "else if", so this forms a chain of conditions.
+
+To execute an if statement, evaluate each expression in order from top to bottom. If an expression produces True, execute the body of that clause and then skip the rest open the if statement. If there is an else, and none of the expressions produce True, then execute the body of the else.
+
+When execution of a function body ends without having executed a return statement, the function returns value None. The type of None is NoneType.
+
+`if-elif` vs. `if-if`
+An if statement with an elif clause is a single statement. The expressions are evaluated from top to bottom until one produces True or until there are no expressions left to evaluate. When an expression produces True, the body associated with it is executed and then the if statement exits. Any subsequent expressions are ignored. For example:
+
+```
+    grade1 = 70
+    grade2 = 80
+
+    if grade1 >= 50:
+        print('You passed a course with grade: ', grade1)
+    elif grade2 >= 50:
+        print('You passed a course with grade: ', grade2)
+```
+
+The if statement condition (grade1 >= 50) evaluates to True, so the body associated with the if is executed and then the if exits. The elif condition is not even evaluated in this case.
+
+It is possible for if statements to appear one after another in a program. Although they are be adjacent to each other, they are completely independent of each other and it is possible for the body of each if to be executed. For example:
+
+    grade1 = 70
+    grade2 = 80
+
+    if grade1 >= 50:
+        print('You passed a course with grade: ', grade1)
+    if grade2 >= 50:
+        print('You passed a course with grade: ', grade2)
+
+In the program above, the condition associated with the first if statement (grade1 >= 50) produces True, so the body associated with it is executed. The condition associated with the second if statement (grade2 >= 50) also produces True, so the body associated with it is also executed.
+
+`Nested ifs`
+It is possible to place an if statement within the body of another if statement. For example:
+
+```
+    if precipitation:
+        if temperature > 0:
+            print('Bring your umbrella!')
+        else:
+            print('Wear your snow boots and winter coat!)
+```
+
+The statement above can be simplified by removing some of the nesting. The message 'Bring your umbrella!' is printed only when both of the if statement conditions are True. The message 'Wear your snow boots and winter coat!' is printed only when the outer if condition is True, but the inner if condition is False. The following is equivalent to the code above:
+
+```
+if precipitation and temperature > 0:
+print('Bring your umbrella')
+elif precipitation:
+print('Wear your snow boots and winter coat!')
 ```
