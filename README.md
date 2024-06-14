@@ -18,7 +18,8 @@
 - [if statements](#7)
 - [while loop](#8)
 - [Type list](#9)
-- [Defining Functions](#4)
+  - [list methods](#91)
+- [Mutability and Aliasing](#10)
 - [Defining Functions](#4)
 - [Defining Functions](#4)
 - [Defining Functions](#4)
@@ -694,71 +695,116 @@ Because Python evaluates the and using lazy evaluation, if the first operand is 
 
 ### 📒 Type list <a name="9"></a>
 
-Our programs will often work with collections of data. One way to store these collections of data is using Python's type list.
+Our programs will often work with collections of data. One way to store these collections of data is using Python's `type list`.
 
 The general form of a list is:
 
+```
 [expr1, expr2, ..., exprN]
+```
+
 For example, here is a list of three grades:
+
+```
 grades = [80, 90, 70]
-List Operations
+```
+
 Like strings, lists can be indexed:
 
-> > > grades[0]
-> > > 80
-> > > grades[1]
-> > > 90
-> > > grades[2]
-> > > 70
+```
+grades[0]
+80
+grades[1]
+90
+grades[2]
+70
+```
 
 Lists can also be sliced, using the same notation as for strings:
 
-> > > grades[0:2]
-> > > [80, 90]
+```
+grades[0:2]
+[80, 90]
+```
 
 The in operator can also be applied to check whether a value is an item in a list.
 
-> > > 90 in grades
-> > > True
-> > > 60 in grades
-> > > False
+```
+90 in grades
+True
+60 in grades
+False
+```
 
 Several of Python's built-in functions can be applied to lists, including:
 
+```
 len(list): return the length of list.
 min(list): return the smallest element in list.
 max(list): return the largest element in list.
 sum(list): return the sum of elements of list (where list items must be numeric).
-For example, here are some calls to those built-in functions:
+```
 
-> > > len(grades)
-> > > 3
-> > > min(grades)
-> > > 70
-> > > max(grades)
-> > > 90
-> > > sum(grades)
-> > > 240
-
-Types of list elements
-Lists elements may be of any type. For example, here is a list of str:
-
-subjects = ['bio', 'cs', 'math', 'history']
-Lists can also contain elements of more than one type. For example, a street address can be represented by a list of [int, str]:
-
-street_address = [10, 'Main Street']
-for loops over list
-Similar to looping over the characters of a string, it is possible to iterate over the elements of a list. For example:
-
-> > > for grade in grades:
-
-    print(grade)
-
-80
-90
-70
-
+Lists elements may be of any type.
+Similar to looping over the characters of a string, it is possible to iterate over the elements of a list.
 The general form of a for loop over a list is:
 
+```
 for variable in list:
 body
+```
+
+---
+
+### 📒 list methods <a name="91"></a>
+
+list.append(object) - Append object to the end of list.
+list.extend(list) - Append the items in the list parameter to the list.
+list.pop([index]) - Remove the item at the end of the list; optional index to remove from anywhere.
+list.remove(object) - Remove the first occurrence of the object;  
+list.reverse() - Reverse the list.
+list.sort() - Sort the list from smallest to largest.
+list.insert(int, object) - Insert object at the given index, moving items to make room.
+
+---
+
+### 📒 Mutability and aliasing <a name="10"></a>
+
+We say that lists are `mutable`: they can be modified. All the other types we have seen so far (str, int, float and bool) are `immutable`: they cannot be modified.
+
+Here are several examples of lists being modified:
+
+```
+> > > classes = ['chem', 'bio', 'cs', 'eng']
+> > >
+> > > # Elements can be added:
+> > >
+> > > classes.append('math')
+> > > classes
+> > > ['chem', 'bio', 'cs', 'eng', 'math']
+> > >
+> > > # Elements can be replaced:
+> > >
+> > > classes[1] = 'soc'
+> > > classes
+> > > ['chem', 'soc', 'cs', 'eng', 'math']
+> > >
+> > > # Elements can be removed:
+> > >
+> > > classes.pop()
+> > > 'math'
+> > > classes
+> > > ['chem', 'soc', 'cs', 'eng']
+```
+
+`Aliasing`. Consider the following code:
+
+```
+> > > lst1 = [11, 12, 13, 14, 15, 16, 17]
+> > > lst2 = lst1
+> > > lst1[-1] = 18
+> > > lst2
+> > > [11, 12, 13, 14, 15, 16, 18]
+```
+
+After the second statement executes, lst1 and lst2 both refer to the same list. When two variables refer to the same objects, they are aliases. If that list is modified, both of lst1 and lst2 will see the change.
