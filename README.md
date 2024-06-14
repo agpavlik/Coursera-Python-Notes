@@ -16,8 +16,8 @@
   - [for loop over String](#53)
 - [Converting str, int, float](#6)
 - [if statements](#7)
-- [Defining Functions](#4)
-- [Defining Functions](#4)
+- [while loop](#8)
+- [Type list](#9)
 - [Defining Functions](#4)
 - [Defining Functions](#4)
 - [Defining Functions](#4)
@@ -622,3 +622,143 @@ print('Bring your umbrella')
 elif precipitation:
 print('Wear your snow boots and winter coat!')
 ```
+
+---
+
+### 📒 while loop <a name="8"></a>
+
+The general form of a `while loop`:
+
+```
+while expression:
+    statements
+```
+
+The while condition, num < 100, is evaluated, and if it is True the statements in the loop body are executed. The loop condition is rechecked and if found to be True, the body executes again. This continues until the loop condition is checked and is False. For example:
+
+```
+num = 2
+while num < 100:
+  num = num * 2
+  print(num)
+
+4
+8
+16
+32
+64
+128
+```
+
+In the example above, there are 6 iterations: the loop body executes 6 times.
+
+`Loops Conditions and Lazy Evaluation`
+The problem: print the characters of str s, up to the first vowel in s.
+
+The first attempt at solving this problem works nicely when s contains one or more vowel, but results in an error if there are no vowels in s:
+
+```
+i = 0
+s = 'xyz'
+while not (s[i] in 'aeiouAEIOU'):
+        print(s[i])
+        i = i + 1
+
+x
+y
+z
+
+Traceback (most recent call last):
+File "<pyshell#73>", line 1, in <module>
+while not (s[i] in 'aeiouAEIOU'):
+IndexError: string index out of range
+```
+
+In the code above, the error occurs when s is indexed at i and i is outside of the range of valid indices. To prevent this error, add an additional condition is added to ensure that i is within the range of valid indices for s:
+
+```
+i = 0
+s = 'xyz'
+while i < len(s) and not (s[i] in 'aeiouAEIOU'):
+        print(s[i])
+        i = i + 1
+
+x
+y
+z
+```
+
+Because Python evaluates the and using lazy evaluation, if the first operand is False, then the expression evaluates to False and the second operand is not even evaluated. That prevents the IndexError from occurring.
+
+---
+
+### 📒 Type list <a name="9"></a>
+
+Our programs will often work with collections of data. One way to store these collections of data is using Python's type list.
+
+The general form of a list is:
+
+[expr1, expr2, ..., exprN]
+For example, here is a list of three grades:
+grades = [80, 90, 70]
+List Operations
+Like strings, lists can be indexed:
+
+> > > grades[0]
+> > > 80
+> > > grades[1]
+> > > 90
+> > > grades[2]
+> > > 70
+
+Lists can also be sliced, using the same notation as for strings:
+
+> > > grades[0:2]
+> > > [80, 90]
+
+The in operator can also be applied to check whether a value is an item in a list.
+
+> > > 90 in grades
+> > > True
+> > > 60 in grades
+> > > False
+
+Several of Python's built-in functions can be applied to lists, including:
+
+len(list): return the length of list.
+min(list): return the smallest element in list.
+max(list): return the largest element in list.
+sum(list): return the sum of elements of list (where list items must be numeric).
+For example, here are some calls to those built-in functions:
+
+> > > len(grades)
+> > > 3
+> > > min(grades)
+> > > 70
+> > > max(grades)
+> > > 90
+> > > sum(grades)
+> > > 240
+
+Types of list elements
+Lists elements may be of any type. For example, here is a list of str:
+
+subjects = ['bio', 'cs', 'math', 'history']
+Lists can also contain elements of more than one type. For example, a street address can be represented by a list of [int, str]:
+
+street_address = [10, 'Main Street']
+for loops over list
+Similar to looping over the characters of a string, it is possible to iterate over the elements of a list. For example:
+
+> > > for grade in grades:
+
+    print(grade)
+
+80
+90
+70
+
+The general form of a for loop over a list is:
+
+for variable in list:
+body
