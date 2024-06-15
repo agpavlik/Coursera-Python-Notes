@@ -24,7 +24,7 @@
 - [for loops over indices](#12)
 - [Parallel Lists and Strings](#13)
 - [Nested lists and loops](#14)
-- [Operators](#1)
+- [Read and Write files](#15)
 - [Operators](#1)
 - [Operators](#1)
 - [Operators](#1)
@@ -998,6 +998,65 @@ Notice that when i is 10, the inner loop executes in its entirety, and only afte
 
 ---
 
+### 📒 Read and Write files<a name="15"></a>
+
+Information stored in files can be accessed by a Python program. To get access to the contents of a file, you need to open the file in your program. When you are done using a file, you should close it.
+Python has a built-in function `open` that can open a file for reading.
+
+The form of `open` is `open(filename, mode)`, where `mode` is 'r' (to open for reading), 'w' (to open for writing), or 'a' (to open for appending to what is already in the file).
+
+Note that if the file is saved in the same directory as your program, you can simply write the name of the file. However, if it is not saved in the same directory, you must provide the path to it.
+
+To close a file, you write `filename.close()`.
+
+There are four standard ways to read from a file. Some use these methods:
+
+- readline(): read and return the next line from the file, including the newline character (if it exists). Return the empty string if there are no more lines in the file.
+
+- readlines(): read and return all lines in a file in a list. The lines include the newline character.
+
+- read(): read the whole file as a single string.
+
+- The for line in file approach: When you want to process every line in the file one at a time.
+
+In order to write to a file, we use `file.write(str)`. This method writes a string to a file. Method write works like Python's print function, except that it does not add a newline character.
+
+Module `tkinter` has a submodule called `filedialog`.
+Function askopenfilename asks the user to select a file to open:
+
+```
+tkinter.filedialog.askopenfilename()
+```
+
+This function returns the full path to the file, so we can use that when we call function open to open that file.
+
+```
+from_filename = tkinter.filedialog.askopenfilename()
+```
+
+Function `asksaveasfilename` asks the user to select a file to save to, and provides a warning if the file already exists.
+
+Examples:
+Now we can open the file we want to read from and get the contents:
+
+```
+from_file = open(from_filename, 'r')
+contents = from_file.read()
+from_file.close()
+```
+
+And we can open the file we want to write to and write the contents:
+
+```
+to_file = open(to_filename, 'w')
+to_file.write('Copy\n')  # We have to add the newline ourselves.
+to_file.write(contents)  # Now write the contents of the file.
+to_file.close()
+
+```
+
+---
+
 ### 📒 Examples<a name="100"></a>
 
 ### 📒 while loop vs for loop with range<a name="101"></a>
@@ -1009,8 +1068,7 @@ while loop to accumulate the sum and print it. Then copy and paste that sum. For
 
 > Solution
 
-````
-
+```
 def odd(start, end):
 sum_odd = 0
 i = start
@@ -1023,7 +1081,6 @@ return sum_odd
 ```
 
 ```
-
 def odd2(start, end):
 sum_odd = 0
 
@@ -1034,5 +1091,95 @@ sum_odd = 0
 
 ```
 
+> Task 2
+
+Shift each item in L one position to the righthand and shift the last item to the first position.
+
+> Solution
+
 ```
-````
+def shift_right(L):
+    ''' (list) -> NoneType
+    Precondition: len(L) >= 1
+    '''
+
+    last_item = L[-1]
+
+    for i in range(1, len(L)):
+        L[len(L) - i] = L[len(L) - i - 1]
+
+    L[0] = last_item
+
+    return L
+```
+
+> Task 3
+
+Return a new list in which each item is a 2-item list with the string from the corresponding position of list1 and the int from the corresponding position of list2.
+
+```
+(list of str, list of int) -> list of [str, int] list
+Precondition: len(list1) == len(list2) >>> make_pairs(['A', 'B', 'C'], [1, 2, 3])
+[['A', 1], ['B', 2], ['C', 3]]
+```
+
+> Solution
+
+```
+def make_pairs(list1, list2):
+
+    pairs = []
+
+    for i in range(len(list1)):
+        pairs.append([list1[i], list2[i]])
+
+    return pairs
+```
+
+```
+def make_pairs(list1, list2):
+
+    pairs = []
+
+    for i in range(len(list1)):
+        inner_list = []
+        inner_list.append(list1[i])
+        inner_list.append(list2[i])
+        pairs.append(inner_list)
+
+    return pairs
+```
+
+> Task 4
+
+Return whether value is an element of one of the nested lists in lst.
+
+```
+  (object, list of list) -> bool
+   >>> contains('moogah', [[70, 'blue'], [1.24, 90, 'moogah'], [80, 100]])
+   True
+```
+
+> Solution
+
+```
+def contains(value, lst):
+
+    found = False
+    for i in range(len(lst)):
+        for j in range(len(lst[i])):
+            if lst[i][j] == value:
+                found = True
+
+    return found
+```
+
+```
+def contains(value, lst):
+
+    for sublist in lst:
+        if value in sublist:
+            found = True
+
+    return found
+```
