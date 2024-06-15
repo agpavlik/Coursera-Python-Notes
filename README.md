@@ -23,7 +23,7 @@
 - [range function](#11)
 - [for loops over indices](#12)
 - [Parallel Lists and Strings](#13)
-- [Operators](#1)
+- [Nested lists and loops](#14)
 - [Operators](#1)
 - [Operators](#1)
 - [Operators](#1)
@@ -904,6 +904,97 @@ print(lst[i])
 ---
 
 ### 📒 Parallel Lists and Strings<a name="13"></a>
+
+Two lists are `parallel` if they have the same length and the items at each index are somehow related. The items at the same index are said to be at `corresponding positions`.
+
+Consider these two lists:
+
+```
+list1 = [1, 2, 3]
+list2 = [2, 4, 2]
+```
+
+In these two lists, the corresponding element of list1[0] is list2[0], the corresponding element of list2[1] is list1[1], and so on.
+
+---
+
+### 📒 Nested lists and loops<a name="14"></a>
+
+Lists can contain items of any type, including other lists. These are called `nested lists`.
+
+Here is an example.
+
+```
+>>> grades = [['Assignment 1', 80], ['Assignment 2', 90], ['Assignment 3', 70]]
+>>> grades[0]
+['Assignment 1', 80]
+>>> grades[1]
+['Assignment 2', 90]
+>>> grades[2]
+['Assignment 3', 70]
+```
+
+To access a nested item, first select the sublist, and then treat the result as a regular list.
+
+For example, to access 'Assignment 1', we can first get the sublist and then use it as we would a regular list:
+
+```
+>>> sublist = grades[0]
+>>> sublist
+['Assignment 1', 80]
+>>> sublist[0]
+'Assignment 1'
+>>> sublist[1]
+80
+```
+
+Both sublist and grades[0] contain the memory address of the ['Assignment 1', 80] nested list.
+
+We can access the items inside the nested lists like this:
+
+```
+>>> grades[0][0]
+'Assignment 1'
+>>> grades[0][1]
+80
+>>> grades[1][0]
+'Assignment 2'
+>>> grades[1][1]
+90
+>>> grades[2][0]
+'Assignment 3'
+>>> grades[2][1]
+70
+```
+
+The bodies of loops can contain any statements, including other loops. When this occurs, this is known as a `nested loop`.
+
+Here is a nested loop involving 2 for loops:
+
+```
+for i in range(10, 13):
+    for j in range(1, 5):
+        print(i, j)
+```
+
+Here is the output:
+
+```
+10 1
+10 2
+10 3
+10 4
+11 1
+11 2
+11 3
+11 4
+12 1
+12 2
+12 3
+12 4
+```
+
+Notice that when i is 10, the inner loop executes in its entirety, and only after j has ranged from 1 through 4 is i assigned the value 11.
 
 ---
 
