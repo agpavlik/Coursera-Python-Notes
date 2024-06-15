@@ -13,16 +13,30 @@
 - [String](#5)
   - [Modifying Strings](#51)
   - [String Methods](#52)
-  - [for loop over String](#53)
+  - [for loops over String](#53)
 - [Converting str, int, float](#6)
 - [if statements](#7)
 - [while loop](#8)
 - [Type list](#9)
   - [list methods](#91)
 - [Mutability and Aliasing](#10)
-- [Defining Functions](#4)
-- [Defining Functions](#4)
-- [Defining Functions](#4)
+- [range function](#11)
+- [for loops over indices](#12)
+- [Parallel Lists and Strings](#13)
+- [Operators](#1)
+- [Operators](#1)
+- [Operators](#1)
+- [Operators](#1)
+- [Operators](#1)
+- [Operators](#1)
+- [Operators](#1)
+- [Operators](#1)
+- [Operators](#1)
+- [Operators](#1)
+- [Operators](#1)
+
+- [Examples](#100)
+  - [while loop vs for loop with range](#101)
 
 ### 📒 Operators <a name="1"></a>
 
@@ -808,3 +822,126 @@ Here are several examples of lists being modified:
 ```
 
 After the second statement executes, lst1 and lst2 both refer to the same list. When two variables refer to the same objects, they are aliases. If that list is modified, both of lst1 and lst2 will see the change.
+
+---
+
+### 📒 range function<a name="11"></a>
+
+In Python, `range` is a built-in function that generates a sequence of numbers. It's commonly used for iterating over a sequence of numbers in for-loops.
+The form of range is:
+
+```
+range([start,] stop[, step]):
+    return a virtual sequence of numbers from start to stop by step
+```
+
+There are other options you can specify to range. One option is to let range generate the numbers corresponding to indices of a string or a list.
+
+```
+s = 'computer science'
+for i in range(len(s)):
+print(i)
+```
+
+You can also tell range what index to start at. For instance, the example below starts at index 1 (as opposed to the default which is 0).
+
+```
+for i in range(1, len(s)):
+print(i)
+```
+
+You can even specify the "step" for range. The default stepping size is 1, which means that numbers increment by 1. The example below starts at index 1 and its step size is there (goes to every third index).
+
+```
+for i in range(1, len(s), 3):
+print(i)
+```
+
+Practical Notes:
+
+- The stop value in range(stop) is exclusive, meaning it is not included in the generated sequence.
+- If step is not specified, it defaults to 1.
+- If start is not specified, it defaults to 0.
+
+---
+
+### 📒 for loops over indices<a name="12"></a>
+
+`Range` is typically used in a for loop to iterate over a sequence of numbers. Here are some examples:
+
+```
+# Iterate over the numbers 0, 1, 2, 3, and 4.
+for i in range(5):
+
+# Iterate over the numbers 2, 3, and 4.
+for i in range(2, 5):
+
+# Iterate over the numbers 3, 6, 9, 12, 15, and 18.
+for i in range(3, 20, 3):
+```
+
+Because `len` returns the number of items in a list, it can be used with `range` to iterate over all the indices. This loop prints all the values in a list:
+
+```
+for i in range(len(lst)):
+    print(lst[i])
+```
+
+This also gives us flexibility to process only part of a list. For example, We can print only the first half of the list:
+
+```
+for i in range(len(lst) // 2):
+    print(lst[i])
+```
+
+Or every other element:
+
+```
+for i in range(0, len(lst), 2):
+print(lst[i])
+```
+
+---
+
+### 📒 Parallel Lists and Strings<a name="13"></a>
+
+---
+
+### 📒 Examples<a name="100"></a>
+
+### 📒 while loop vs for loop with range<a name="101"></a>
+
+> Task 1
+
+What is the sum of the odd numbers from 1523 through 10503, inclusive? Hint: write a
+while loop to accumulate the sum and print it. Then copy and paste that sum. For maximum learning, do it with a for loop as well, using range.
+
+> Solution
+
+````
+
+def odd(start, end):
+sum_odd = 0
+i = start
+while i <= end:
+if i % 2 != 0:
+sum_odd += i
+i += 1
+return sum_odd
+
+```
+
+```
+
+def odd2(start, end):
+sum_odd = 0
+
+    for i in range(start, end + 1):
+        if i % 2 != 0:
+            sum_odd += i
+    return sum_odd
+
+```
+
+```
+````
