@@ -25,7 +25,8 @@
 - [Parallel Lists and Strings](#13)
 - [Nested lists and loops](#14)
 - [Read and Write files](#15)
-- [Operators](#1)
+- [Tuples](#16)
+- [Type dict](#17)
 - [Operators](#1)
 - [Operators](#1)
 - [Operators](#1)
@@ -916,6 +917,51 @@ list2 = [2, 4, 2]
 
 In these two lists, the corresponding element of list1[0] is list2[0], the corresponding element of list2[1] is list1[1], and so on.
 
+```
+def count_matches(s1, s2):
+    ''' (str, str) -> int
+
+    Return the number of positions in s1 that contain the
+    same character at the corresponding position of s2.
+
+    Precondition: len(s1) == len(s2)
+
+    >>> count_matches('ate', 'ape')
+    2
+    >>> count_matches('head', 'hard')
+    2
+    '''
+
+    num_matches = 0
+
+    for i in range(len(s1)):
+        if s1[i] == s2[i]:
+            num_matches = num_matches + 1
+
+    return num_matches
+```
+
+```
+def sum_items(list1, list2):
+''' (list of number, list of number) -> list of number
+
+    Return a new list in which each item is the sum of the items at the
+    corresponding position of list1 and list2.
+
+    Precondition: len(list1) == len(list2)
+
+    >> sum_items([1, 2, 3], [2, 4, 2])
+    [3, 6, 5]
+    '''
+
+    sum_list = []
+
+    for i in range(len(list1)):
+        sum_list.append(list1[i] + list2[i])
+
+    return sum_list
+```
+
 ---
 
 ### 📒 Nested lists and loops<a name="14"></a>
@@ -925,13 +971,12 @@ Lists can contain items of any type, including other lists. These are called `ne
 Here is an example.
 
 ```
->>> grades = [['Assignment 1', 80], ['Assignment 2', 90], ['Assignment 3', 70]]
->>> grades[0]
-['Assignment 1', 80]
->>> grades[1]
-['Assignment 2', 90]
->>> grades[2]
-['Assignment 3', 70]
+
+> > > grades = [['Assignment 1', 80], ['Assignment 2', 90], ['Assignment 3', 70]]
+> > > grades[0] > > > ['Assignment 1', 80]
+> > > grades[1] > > > ['Assignment 2', 90]
+> > > grades[2] > > > ['Assignment 3', 70]
+
 ```
 
 To access a nested item, first select the sublist, and then treat the result as a regular list.
@@ -939,13 +984,15 @@ To access a nested item, first select the sublist, and then treat the result as 
 For example, to access 'Assignment 1', we can first get the sublist and then use it as we would a regular list:
 
 ```
->>> sublist = grades[0]
->>> sublist
-['Assignment 1', 80]
->>> sublist[0]
-'Assignment 1'
->>> sublist[1]
-80
+
+> > > sublist = grades[0]
+> > > sublist
+> > > ['Assignment 1', 80]
+> > > sublist[0]
+> > > 'Assignment 1'
+> > > sublist[1]
+> > > 80
+
 ```
 
 Both sublist and grades[0] contain the memory address of the ['Assignment 1', 80] nested list.
@@ -953,18 +1000,20 @@ Both sublist and grades[0] contain the memory address of the ['Assignment 1', 80
 We can access the items inside the nested lists like this:
 
 ```
->>> grades[0][0]
-'Assignment 1'
->>> grades[0][1]
-80
->>> grades[1][0]
-'Assignment 2'
->>> grades[1][1]
-90
->>> grades[2][0]
-'Assignment 3'
->>> grades[2][1]
-70
+
+> > > grades[0][0]
+> > > 'Assignment 1'
+> > > grades[0][1]
+> > > 80
+> > > grades[1][0]
+> > > 'Assignment 2'
+> > > grades[1][1]
+> > > 90
+> > > grades[2][0]
+> > > 'Assignment 3'
+> > > grades[2][1]
+> > > 70
+
 ```
 
 The bodies of loops can contain any statements, including other loops. When this occurs, this is known as a `nested loop`.
@@ -972,14 +1021,17 @@ The bodies of loops can contain any statements, including other loops. When this
 Here is a nested loop involving 2 for loops:
 
 ```
+
 for i in range(10, 13):
-    for j in range(1, 5):
-        print(i, j)
+for j in range(1, 5):
+print(i, j)
+
 ```
 
 Here is the output:
 
 ```
+
 10 1
 10 2
 10 3
@@ -992,6 +1044,7 @@ Here is the output:
 12 2
 12 3
 12 4
+
 ```
 
 Notice that when i is 10, the inner loop executes in its entirety, and only after j has ranged from 1 through 4 is i assigned the value 11.
@@ -1025,13 +1078,17 @@ Module `tkinter` has a submodule called `filedialog`.
 Function askopenfilename asks the user to select a file to open:
 
 ```
+
 tkinter.filedialog.askopenfilename()
+
 ```
 
 This function returns the full path to the file, so we can use that when we call function open to open that file.
 
 ```
+
 from_filename = tkinter.filedialog.askopenfilename()
+
 ```
 
 Function `asksaveasfilename` asks the user to select a file to save to, and provides a warning if the file already exists.
@@ -1040,19 +1097,118 @@ Examples:
 Now we can open the file we want to read from and get the contents:
 
 ```
+
 from_file = open(from_filename, 'r')
 contents = from_file.read()
 from_file.close()
+
 ```
 
 And we can open the file we want to write to and write the contents:
 
 ```
+
 to_file = open(to_filename, 'w')
-to_file.write('Copy\n')  # We have to add the newline ourselves.
-to_file.write(contents)  # Now write the contents of the file.
+to_file.write('Copy\n') # We have to add the newline ourselves.
+to_file.write(contents) # Now write the contents of the file.
 to_file.close()
 
+```
+
+---
+
+### 📒 Tuples<a name="16"></a>
+
+`Tuples` are immutable sequences: they cannot be modified. Tuples and lists have much in common, but lists are mutable sequences.
+
+Tuples use parentheses instead of square brackets:
+
+```
+lst = ['a', 3, -0.2]
+tup = ('a', 3, -0.2)
+```
+
+Once created, items in lists and tuples are accessed using the same notation. Tuples have fewer methods than lists. In fact, the only regular methods ('append', 'count', extend', 'index', 'insert', 'pop', 'remove', 'reverse', sort') and 'count' and 'index'. The rest of the list methods are not available for tuple because they modify the object, and tuples, being immutable, cannot be modified.
+A tuple can be passed as an argument to the built-in function len:
+It is also possible to iterate over the indices of a tuple.
+
+Tuples are ideal for representing fixed collections of heterogeneous data, ensuring data integrity, and facilitating multiple value returns in functions.
+
+---
+
+### 📒 Type dict<a name="17"></a>
+
+Another way to store collections of data is using Python's `dictionary type`: `dict`.
+
+The general form of a dictionary is:
+
+```
+{key1: value1, key2: value2, ..., keyN: valueN}
+```
+
+Keys must be unique. Values may be duplicated. For example:
+
+```
+asn_to_grade = {'A1': 80, 'A2': 90, 'A3': 90}
+```
+
+Dictionaries are mutable: they can be modified. There are a series of operations and methods you can apply to dictionaries which are outlined below.
+
+| Operation         | Description                                                                                                                                                      | Example                                                                                                                                      |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| object in dict    | Checks whether object is a key in dict.                                                                                                                          | >>> asn_to_grade = {'A1': 80, 'A2': 90, 'A3': 90} >>> 'A1' in asn_to_grade >>> True                                                          |
+| len(dict)         | Returns the number of keys in dict.                                                                                                                              | >>> asn_to_grade = {'A1': 80, 'A2': 90, 'A3': 90} >>> len(asn_to_grade) >>> 3                                                                |
+| del dict[key]     | Removes a key and its associated value from dict.                                                                                                                | >>> asn_to_grade = {'A1': 80, 'A2': 90, 'A3': 90} >>> del asn_to_grade['A1'] >>> asn_to_grade >>> {'A3': 90, 'A2': 90}                       |
+| dict[key] = value | If key does not exist in dict, adds key and its associated value to dict. If key exists in dict, updates dict by setting the value associated with key to value. | >>> asn_to_grade = {'A1' : 80, 'A2': 90, 'A3' : 90} >>> asn_to_grade['A4'] = 70 >>> asn_to_grade >>>{'A1': 80, 'A3': 90, 'A2': 90, 'A4': 70} |
+
+Dictionaries are unordered. That is, the order the key-value pairs are added to the dictionary has no effect on the order in which they are accessed.
+For example:
+
+```
+>>> asn_to_grade = {'A1': 80, 'A2': 70, 'A3': 90}
+>>> for assignment in asn_to_grade:
+    print(assignment)
+
+A1
+A3
+A2
+```
+
+The for-loop above printed out the keys of the dictionary. It is also possible to print out the values:
+
+```
+>>> asn_to_grade = {'A1': 80, 'A2': 70, 'A3': 90}
+>>> for assignment in asn_to_grade:
+    print(asn_to_grade[assignment])
+
+80
+90
+70
+```
+
+Finally, both the keys are values can be printed:
+
+```
+>>> asn_to_grade = {'A1': 80, 'A2': 70, 'A3': 90}
+>>> for assignment in asn_to_grade:
+    print(assignment, asn_to_grade[assignment])
+
+A1 80
+A3 90
+A2 70
+
+```
+
+The keys of a dictionary must be immutable. Therefore, lists, dictionary and other mutable types cannot be used as keys. The following results in an error:
+
+```
+d[[1, 2]] = 'banana'
+```
+
+Since lists are mutable, they cannot be keys. Instead, to use a sequence as a key, type tuple can be used:
+
+```
+d[(1, 2)] = 'banana'
 ```
 
 ---
@@ -1077,7 +1233,6 @@ if i % 2 != 0:
 sum_odd += i
 i += 1
 return sum_odd
-
 ```
 
 ```
@@ -1088,7 +1243,6 @@ sum_odd = 0
         if i % 2 != 0:
             sum_odd += i
     return sum_odd
-
 ```
 
 > Task 2
@@ -1099,10 +1253,9 @@ Shift each item in L one position to the righthand and shift the last item to th
 
 ```
 def shift_right(L):
-    ''' (list) -> NoneType
-    Precondition: len(L) >= 1
-    '''
-
+''' (list) -> NoneType
+Precondition: len(L) >= 1
+'''
     last_item = L[-1]
 
     for i in range(1, len(L)):
@@ -1155,9 +1308,11 @@ def make_pairs(list1, list2):
 Return whether value is an element of one of the nested lists in lst.
 
 ```
-  (object, list of list) -> bool
-   >>> contains('moogah', [[70, 'blue'], [1.24, 90, 'moogah'], [80, 100]])
-   True
+(object, list of list) -> bool
+
+> > > contains('moogah', [[70, 'blue'], [1.24, 90, 'moogah'], [80, 100]])
+> > > True
+
 ```
 
 > Solution
