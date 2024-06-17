@@ -27,8 +27,8 @@
 - [Read and Write files](#15)
 - [Tuples](#16)
 - [Type dict](#17)
-- [Operators](#1)
-- [Operators](#1)
+  - [Switching Keys and Values](#171)
+  - [Mapping A Key To A List](#172)
 - [Operators](#1)
 - [Operators](#1)
 - [Operators](#1)
@@ -1213,6 +1213,60 @@ d[(1, 2)] = 'banana'
 
 ---
 
+### 📒 Inverting a Dictionary <a name="171"></a>
+
+Dictionaries have keys that are unique and each key has a value associated with it. For example, here is a dictionary mapping fruit to their colours:
+
+```
+
+fruit_to_colour = {'watermelon': 'green', 'pomegranate': 'red',
+'peach': 'orange', 'cherry': 'red', 'pear': 'green',
+'banana': 'yellow', 'plum': 'purple', 'orange': 'orange'}
+
+```
+
+To invert the dictionary, that is, switch the mapping to be colours to fruit, here is one approach:
+
+```
+>>> colour_to_fruit = {}
+>>> for fruit in fruit_to_colour:
+
+    colour = fruit_to_colour[fruit]
+    colour_to_fruit[colour] = fruit
+
+>>> colour_to_fruit
+>>> {'orange': 'orange', 'purple': 'plum', 'green': 'pear', 'yellow': 'banana', 'red': 'pomegranate'}
+
+```
+
+The resulting dictionary is missing some fruit. This happens since colours, which are keys, are unique so later assignments using the same colour replace earlier entries. A way to remedy this is to map colours to a list of fruit.
+
+---
+
+### 📒 Mapping A Key To A List <a name="172"></a>
+
+For the example above, we need to consider two cases when adding a colour and a fruit to the dictionary:
+
+- If the colour is not a key in the dictionary, add it with its value being a single element a list consisting of the fruit.
+- If the colour is already a key, append the fruit to the list of fruit associated with that key.
+
+```
+>>> colour_to_fruit = {}
+>>> for fruit in fruit_to_colour:
+
+    # What colour is the fruit?
+    colour = fruit_to_colour[fruit]
+    if not (colour in colour_to_fruit):
+        colour_to_fruit[colour] = [fruit]
+    else:
+        colour_to_fruit[colour].append(fruit)
+
+>>> colour_to_fruit
+>>> {'orange': ['peach', 'orange'], 'purple': ['plum'], 'green': ['watermelon', 'pear'], 'yellow': ['banana'], 'red': ['cherry', 'pomegranate']}
+```
+
+---
+
 ### 📒 Examples<a name="100"></a>
 
 ### 📒 while loop vs for loop with range<a name="101"></a>
@@ -1225,6 +1279,7 @@ while loop to accumulate the sum and print it. Then copy and paste that sum. For
 > Solution
 
 ```
+
 def odd(start, end):
 sum_odd = 0
 i = start
@@ -1233,9 +1288,11 @@ if i % 2 != 0:
 sum_odd += i
 i += 1
 return sum_odd
+
 ```
 
 ```
+
 def odd2(start, end):
 sum_odd = 0
 
@@ -1243,6 +1300,7 @@ sum_odd = 0
         if i % 2 != 0:
             sum_odd += i
     return sum_odd
+
 ```
 
 > Task 2
@@ -1252,11 +1310,12 @@ Shift each item in L one position to the righthand and shift the last item to th
 > Solution
 
 ```
+
 def shift_right(L):
 ''' (list) -> NoneType
 Precondition: len(L) >= 1
 '''
-    last_item = L[-1]
+last_item = L[-1]
 
     for i in range(1, len(L)):
         L[len(L) - i] = L[len(L) - i - 1]
@@ -1264,6 +1323,7 @@ Precondition: len(L) >= 1
     L[0] = last_item
 
     return L
+
 ```
 
 > Task 3
@@ -1271,14 +1331,17 @@ Precondition: len(L) >= 1
 Return a new list in which each item is a 2-item list with the string from the corresponding position of list1 and the int from the corresponding position of list2.
 
 ```
+
 (list of str, list of int) -> list of [str, int] list
 Precondition: len(list1) == len(list2) >>> make_pairs(['A', 'B', 'C'], [1, 2, 3])
 [['A', 1], ['B', 2], ['C', 3]]
+
 ```
 
 > Solution
 
 ```
+
 def make_pairs(list1, list2):
 
     pairs = []
@@ -1287,9 +1350,11 @@ def make_pairs(list1, list2):
         pairs.append([list1[i], list2[i]])
 
     return pairs
+
 ```
 
 ```
+
 def make_pairs(list1, list2):
 
     pairs = []
@@ -1301,6 +1366,7 @@ def make_pairs(list1, list2):
         pairs.append(inner_list)
 
     return pairs
+
 ```
 
 > Task 4
@@ -1308,6 +1374,7 @@ def make_pairs(list1, list2):
 Return whether value is an element of one of the nested lists in lst.
 
 ```
+
 (object, list of list) -> bool
 
 > > > contains('moogah', [[70, 'blue'], [1.24, 90, 'moogah'], [80, 100]])
@@ -1318,6 +1385,7 @@ Return whether value is an element of one of the nested lists in lst.
 > Solution
 
 ```
+
 def contains(value, lst):
 
     found = False
@@ -1327,9 +1395,11 @@ def contains(value, lst):
                 found = True
 
     return found
+
 ```
 
 ```
+
 def contains(value, lst):
 
     for sublist in lst:
@@ -1337,4 +1407,9 @@ def contains(value, lst):
             found = True
 
     return found
+
+```
+
+```
+
 ```
